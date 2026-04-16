@@ -17,6 +17,9 @@ backend/rag_store/
 backend/saved/
 backend/uploads/
 backend/.data/
+backend/app/database.db
+backend/app/uploads/
+backend/app/ml/saved/
 
 # Node
 node_modules/
