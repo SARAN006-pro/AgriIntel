@@ -1,4 +1,8 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import {
+  getUserProfile, getLearningStats, updateUserPreferences,
+  submitFeedback, submitCorrection, recordCropOutcome,
+} from '../services/api';
 
 const UserMemoryContext = createContext();
 
@@ -29,7 +33,6 @@ export function UserMemoryProvider({ children }) {
   const loadProfile = useCallback(async () => {
     if (!deviceId) return;
     try {
-      const { getUserProfile, getLearningStats } = await import('../services/api');
       const [profileRes, statsRes] = await Promise.allSettled([
         getUserProfile(deviceId),
         getLearningStats(deviceId),
@@ -50,33 +53,28 @@ export function UserMemoryProvider({ children }) {
   const updatePreferences = useCallback(async (prefs) => {
     if (!deviceId) return;
     try {
-      const { updateUserPreferences } = await import('../services/api');
       await updateUserPreferences({ device_id: deviceId, ...prefs });
-      // Reload profile
       loadProfile();
     } catch {}
   }, [deviceId, loadProfile]);
 
-  const submitFeedback = useCallback(async (feedbackData) => {
+  const submitFeedbackFn = useCallback(async (feedbackData) => {
     if (!deviceId) return;
     try {
-      const { submitFeedback } = await import('../services/api');
       await submitFeedback({ ...feedbackData, device_id: deviceId });
     } catch {}
   }, [deviceId]);
 
-  const submitCorrection = useCallback(async (correctionData) => {
+  const submitCorrectionFn = useCallback(async (correctionData) => {
     if (!deviceId) return;
     try {
-      const { submitCorrection } = await import('../services/api');
       await submitCorrection({ ...correctionData, device_id: deviceId });
     } catch {}
   }, [deviceId]);
 
-  const recordCropOutcome = useCallback(async (outcomeData) => {
+  const recordCropOutcomeFn = useCallback(async (outcomeData) => {
     if (!deviceId) return;
     try {
-      const { recordCropOutcome } = await import('../services/api');
       await recordCropOutcome({ device_id: deviceId, ...outcomeData });
     } catch {}
   }, [deviceId]);
@@ -84,7 +82,6 @@ export function UserMemoryProvider({ children }) {
   const refreshStats = useCallback(async () => {
     if (!deviceId) return;
     try {
-      const { getLearningStats } = await import('../services/api');
       const res = await getLearningStats(deviceId);
       setStats(res.data);
     } catch {}
@@ -106,9 +103,9 @@ export function UserMemoryProvider({ children }) {
       loading,
       initialized,
       updatePreferences,
-      submitFeedback,
-      submitCorrection,
-      recordCropOutcome,
+      submitFeedback: submitFeedbackFn,
+      submitCorrection: submitCorrectionFn,
+      recordCropOutcome: recordCropOutcomeFn,
       refreshStats,
       debouncedPreferenceUpdate,
     }}>

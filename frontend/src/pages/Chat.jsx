@@ -258,7 +258,7 @@ export default function Chat() {
             )}
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto" style={{ padding: '24px 32px' }}>
+            <div className="flex-1 overflow-y-auto px-4 md:px-8 lg:px-12">
               <div className="max-w-4xl mx-auto flex flex-col gap-5">
                 {interimText && (
                   <div className="flex justify-end animate-fade-up">
@@ -319,7 +319,7 @@ export default function Chat() {
             </div>
 
             {/* Input Area */}
-            <div style={{ borderTop: '1px solid var(--color-border)', background: 'var(--color-surface)', padding: '16px 32px 20px' }}>
+            <div style={{ borderTop: '1px solid var(--color-border)', background: 'var(--color-surface)', padding: '16px 24px 20px' }}>
               <div className="max-w-4xl mx-auto">
                 <div
                   className="flex gap-3 items-end"

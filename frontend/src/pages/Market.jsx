@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, TrendingFlat } from 'lucide-react'
+import { TrendingUp, TrendingDown } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import EmptyState from '../components/EmptyState'

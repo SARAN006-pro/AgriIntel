@@ -13,23 +13,28 @@ export function Skeleton({ className = '', variant = 'text' }) {
 
 export function StatSkeleton() {
   return (
-    <div className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/85 dark:bg-slate-900/85 backdrop-blur p-5">
-      <div className="skeleton h-3 w-24 rounded-lg mb-3" />
-      <div className="skeleton h-8 w-16 rounded-lg mb-2" />
-      <div className="skeleton h-3 w-20 rounded-lg" />
-    </div>
+    <div
+      className="skeleton"
+      style={{
+        height: 80,
+        borderRadius: 'var(--radius-xl)',
+        background: 'var(--color-surface)',
+        border: '1px solid var(--color-border)',
+      }}
+    />
   )
 }
 
 export function CardSkeleton({ lines = 3 }) {
   return (
-    <div className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/85 dark:bg-slate-900/85 backdrop-blur p-6">
-      <div className="skeleton h-5 w-32 rounded-lg mb-6" />
-      <div className="space-y-3">
-        {Array.from({ length: lines }).map((_, i) => (
-          <div key={i} className="skeleton h-4 w-full rounded-lg" />
-        ))}
-      </div>
-    </div>
+    <div
+      className="skeleton"
+      style={{
+        height: 140,
+        borderRadius: 'var(--radius-xl)',
+        background: 'var(--color-surface)',
+        border: '1px solid var(--color-border)',
+      }}
+    />
   )
 }

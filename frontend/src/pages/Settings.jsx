@@ -5,7 +5,7 @@ import TopBar from '../components/TopBar'
 
 const APP_CONFIG = [
   { icon: Server, label: 'Backend URL', value: 'http://localhost:8000', note: 'FastAPI server address' },
-  { icon: Cpu, label: 'LLM Model', value: 'mistralai/mistral-7b-instruct', note: 'Model used for chat and RAG' },
+  { icon: Brain, label: 'LLM Model', value: 'nvidia/nemotron-3-super-120b-a12b:free', note: 'Model used for chat and RAG' },
   { icon: Layers, label: 'Chunk size', value: '500 characters', note: 'RAG document chunking size' },
   { icon: Globe, label: 'Top-K chunks', value: '3', note: 'Chunks retrieved per query' },
 ]
@@ -106,7 +106,7 @@ export default function Settings() {
     <div className="flex-1 flex flex-col overflow-y-auto">
       <TopBar title="Settings" subtitle="Configure your SmartFarm AI environment" />
 
-      <div className="page-container" style={{ maxWidth: 860 }}>
+      <div className="page-container">
         {/* ── App Configuration ─────────────────────────────── */}
         <div className="mb-6">
           <h2 className="section-title mb-1">Application Configuration</h2>

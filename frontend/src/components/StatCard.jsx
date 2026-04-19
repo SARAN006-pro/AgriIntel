@@ -81,11 +81,12 @@ export default function StatCard({
 
   return (
     <div
-      className={`card relative overflow-hidden ${className}`}
+      className={`card relative ${className}`}
       style={{
         padding: '22px',
         background: c.bg,
         borderColor: c.border,
+        overflow: 'hidden',
       }}
     >
       {/* Decorative corner gradient */}

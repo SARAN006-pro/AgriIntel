@@ -36,15 +36,19 @@ const NAV_SECTIONS = [
   },
 ]
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
+  const handleNavClick = () => {
+    if (window.innerWidth < 1024) onClose?.()
+  }
   return (
     <aside
-      className="fixed left-0 top-0 h-screen flex flex-col z-40"
+      className="fixed left-0 top-0 h-screen flex flex-col z-40 transition-transform duration-300"
       style={{
         width: 'var(--sidebar-width)',
         background: 'var(--color-surface)',
         borderRight: '1px solid var(--color-border)',
         boxShadow: 'var(--shadow-sm)',
+        transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
       }}
     >
       {/* Logo & Brand */}
@@ -92,6 +96,7 @@ export default function Sidebar() {
                 <NavLink
                   key={to}
                   to={to}
+                  onClick={handleNavClick}
                   className={({ isActive }) =>
                     [
                       'group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 relative overflow-hidden',

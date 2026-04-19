@@ -96,6 +96,48 @@
   color-scheme: dark;
 }
 
+/* ─── App Layout Shell ──────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+.app-main {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--sidebar-width);
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 30;
+  backdrop-filter: blur(2px);
+}
+@media (max-width: 1023px) {
+  .app-main {
+    margin-left: 0;
+  }
+}
+
+/* ─── Text Colour Utilities ──────────────────────────────────── */
+.text-primary { color: var(--color-primary) !important; }
+.text-primary-inverse { color: var(--color-text-inverse) !important; }
+.bg-primary { background-color: var(--color-primary) !important; }
+
+/* ─── Responsive Utilities ────────────────────────────────────── */
+@media (max-width: 768px) {
+  .page-container { padding: 20px 16px; }
+  .page-title { font-size: 1.25rem; }
+  .hide-mobile { display: none !important; }
+}
+@media (max-width: 1024px) {
+  .hide-tablet { display: none !important; }
+}
+@media (min-width: 1024px) {
+  .show-mobile-only { display: none !important; }
+}
+
 html { background: var(--color-surface-2); }
 body { margin: 0; min-height: 100vh; background: var(--color-surface-2); color: var(--color-text); }
 #root { min-height: 100vh; }
@@ -186,6 +228,14 @@ button { cursor: pointer; font-family: inherit; }
 .animate-bounce     { animation: bounce 1s ease-in-out infinite; }
 .animate-float      { animation: float 3s ease-in-out infinite; }
 .animate-pulse-dot  { animation: pulse-dot 1.5s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 1.5s ease-out infinite; }
+.animate-slide-right { animation: slideInRight 0.3s ease-out both; }
+
+/* App route enter animation */
+.app-enter { animation: fadeUp 0.3s ease-out both; }
+
+/* Page enter animation */
+.page-enter { animation: fadeUp 0.3s ease-out both; }
 
 /* Stagger children */
 .stagger-children > *:nth-child(1) { animation-delay: 0ms; }
@@ -194,6 +244,12 @@ button { cursor: pointer; font-family: inherit; }
 .stagger-children > *:nth-child(4) { animation-delay: 180ms; }
 .stagger-children > *:nth-child(5) { animation-delay: 240ms; }
 .stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 0.3; }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
 
 /* ─── Skeleton Loader ───────────────────────────────────────── */
 .skeleton {
@@ -222,6 +278,7 @@ button { cursor: pointer; font-family: inherit; }
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
   transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
 }
 .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
@@ -736,7 +793,7 @@ tbody tr:last-child td { border-bottom: none; }
   padding: 12px 18px;
   font-size: 0.9rem;
   line-height: 1.6;
-  max-width: 75%;
+  max-width: 85%;
   box-shadow: var(--shadow-md);
 }
 .chat-bubble-assistant {
@@ -747,8 +804,12 @@ tbody tr:last-child td { border-bottom: none; }
   padding: 12px 18px;
   font-size: 0.9rem;
   line-height: 1.6;
-  max-width: 75%;
+  max-width: 85%;
   box-shadow: var(--shadow-sm);
+}
+@media (min-width: 640px) {
+  .chat-bubble-user,
+  .chat-bubble-assistant { max-width: 72%; }
 }
 .dark .chat-bubble-assistant { background: var(--color-surface-dark-2); border-color: var(--color-border-dark); }
 
@@ -758,8 +819,12 @@ tbody tr:last-child td { border-bottom: none; }
   width: 7px; height: 7px;
   background: var(--color-text-muted);
   border-radius: 50%;
-  animation: bounce 1.2s ease-in-out infinite;
+  animation: loadingDot 1.2s ease-in-out infinite;
 }
 .loading-dots span:nth-child(1) { animation-delay: 0ms; }
 .loading-dots span:nth-child(2) { animation-delay: 160ms; }
 .loading-dots span:nth-child(3) { animation-delay: 320ms; }
+@keyframes loadingDot {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50%       { transform: scale(1.35); opacity: 1; }
+}

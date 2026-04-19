@@ -150,8 +150,8 @@ export default function Recommend() {
 
       {/* Tab Bar */}
       <div
-        className="flex items-center gap-4 px-6 py-3"
-        style={{ borderBottom: '1px solid var(--color-border)', background: 'var(--color-surface)', paddingLeft: 28 }}
+        className="flex items-center gap-4 px-6 py-3 flex-wrap"
+        style={{ borderBottom: '1px solid var(--color-border)', background: 'var(--color-surface)' }}
       >
         <div className="tab-list">
           <button onClick={() => setTab('crop')} className={`tab-item ${tab === 'crop' ? 'active' : ''}`}>

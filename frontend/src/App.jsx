@@ -33,8 +33,9 @@ function AppLayout({ children }) {
       <main
         className="app-main"
         style={{
-          marginLeft: 0,
+          marginLeft: sidebarOpen ? 0 : 0,
           paddingLeft: 0,
+          transition: 'margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
         {children}

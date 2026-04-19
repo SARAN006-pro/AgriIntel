@@ -96,22 +96,11 @@ export default function TopBar({ title, subtitle, status = 'connected', actions 
       className="sticky top-0 z-30 flex items-center px-6 gap-4"
       style={{
         height: 'var(--topbar-height)',
-        background: 'rgba(248,250,252,0.85)',
+        background: 'var(--color-surface)',
         backdropFilter: 'blur(16px)',
         borderBottom: '1px solid var(--color-border)',
       }}
     >
-      {/* Dark mode bg */}
-      <div
-        style={{
-          position: 'fixed',
-          inset: 0,
-          background: 'var(--color-surface-2)',
-          opacity: 0,
-          pointerEvents: 'none',
-          transition: 'opacity 0.2s',
-        }}
-      />
 
       {/* Title */}
       <div className="flex-1 min-w-0">

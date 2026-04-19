@@ -76,138 +76,184 @@ export default function Economics() {
   return (
     <div className="flex-1 flex flex-col overflow-y-auto">
       <TopBar title="Profit Margin Calculator" subtitle="Estimate revenue and costs for your crop" />
-      <div className="p-6 md:p-8 space-y-6">
-
+      <div className="page-container">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           {/* Input Form */}
-          <div className="bg-white/85 dark:bg-slate-900/85 backdrop-blur rounded-3xl border border-slate-200/80 dark:border-slate-800 p-6 shadow-sm">
-            <h2 className="font-semibold text-slate-900 dark:text-white mb-5">Cost & Revenue Inputs</h2>
+          <div className="card" style={{ padding: '28px', borderColor: 'var(--color-border)' }}>
+            <div className="flex items-center gap-2 mb-5">
+              <div
+                className="flex items-center justify-center rounded-xl"
+                style={{ width: 38, height: 38, background: 'rgba(16,185,129,0.1)' }}
+              >
+                <DollarSign size={17} style={{ color: 'var(--color-primary)' }} strokeWidth={2} />
+              </div>
+              <div>
+                <h2 className="section-title">Cost &amp; Revenue Inputs</h2>
+                <p className="section-subtitle">Enter your crop production costs</p>
+              </div>
+            </div>
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[11px] font-semibold tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 mb-1 block">Crop</label>
-                  <select name="crop" value={form.crop} onChange={handleCropChange} className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-white capitalize">
+                  <label className="label">Crop</label>
+                  <select name="crop" value={form.crop} onChange={handleCropChange} className="input select capitalize">
                     {crops.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
-                  {priceHint && <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-1">{priceHint}</p>}
+                  {priceHint && <p className="text-xs mt-1" style={{ color: 'var(--color-primary)' }}>{priceHint}</p>}
                 </div>
                 <div>
-                  <label className="text-[11px] font-semibold tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 mb-1 block">Area (hectares)</label>
-                  <input type="number" name="area_ha" value={form.area_ha} onChange={handleChange} min={0.1} step={0.1} className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-white" />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[11px] font-semibold tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 mb-1 block">Fertilizer Cost (₹)</label>
-                  <input type="number" name="fertilizer_cost" value={form.fertilizer_cost} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-white" />
-                </div>
-                <div>
-                  <label className="text-[11px] font-semibold tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 mb-1 block">Pesticide Cost (₹)</label>
-                  <input type="number" name="pesticide_cost" value={form.pesticide_cost} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-white" />
+                  <label className="label">Area (ha)</label>
+                  <input type="number" name="area_ha" value={form.area_ha} onChange={handleChange} min={0.1} step={0.1} className="input" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[11px] font-semibold tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 mb-1 block">Labor Cost (₹)</label>
-                  <input type="number" name="labor_cost" value={form.labor_cost} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-white" />
+                  <label className="label">Fertilizer Cost (₹)</label>
+                  <input type="number" name="fertilizer_cost" value={form.fertilizer_cost} onChange={handleChange} className="input" />
                 </div>
                 <div>
-                  <label className="text-[11px] font-semibold tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 mb-1 block">Price per kg (₹)</label>
-                  <input type="number" name="price_per_kg" value={form.price_per_kg} onChange={handleChange} step={0.5} className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-white" />
+                  <label className="label">Pesticide Cost (₹)</label>
+                  <input type="number" name="pesticide_cost" value={form.pesticide_cost} onChange={handleChange} className="input" />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="label">Labor Cost (₹)</label>
+                  <input type="number" name="labor_cost" value={form.labor_cost} onChange={handleChange} className="input" />
+                </div>
+                <div>
+                  <label className="label">Price per kg (₹)</label>
+                  <input type="number" name="price_per_kg" value={form.price_per_kg} onChange={handleChange} step={0.5} className="input" />
                 </div>
               </div>
               <div>
-                <label className="text-[11px] font-semibold tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 mb-1 block">Expected Yield (kg)</label>
-                <input type="number" name="expected_yield_kg" value={form.expected_yield_kg} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-white" />
+                <label className="label">Expected Yield (kg)</label>
+                <input type="number" name="expected_yield_kg" value={form.expected_yield_kg} onChange={handleChange} className="input" />
               </div>
-              <button onClick={submit} disabled={loading} className="w-full mt-2 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.97] disabled:opacity-50 text-white font-semibold py-3 rounded-2xl transition-all shadow-sm flex items-center justify-center gap-2">
+              <button onClick={submit} disabled={loading} className="btn btn-primary w-full mt-2">
                 <Calculator size={16} /> {loading ? 'Calculating...' : 'Calculate Profit'}
               </button>
             </div>
           </div>
 
           {/* Results */}
-          <div className="bg-white/85 dark:bg-slate-900/85 backdrop-blur rounded-3xl border border-slate-200/80 dark:border-slate-800 p-6 shadow-sm">
-            <h2 className="font-semibold text-slate-900 dark:text-white mb-5">Results</h2>
+          <div className="card" style={{ padding: '28px', borderColor: 'var(--color-border)' }}>
+            <div className="flex items-center gap-2 mb-5">
+              <div
+                className="flex items-center justify-center rounded-xl"
+                style={{ width: 38, height: 38, background: 'rgba(16,185,129,0.1)' }}
+              >
+                <TrendingUp size={17} style={{ color: 'var(--color-primary)' }} strokeWidth={2} />
+              </div>
+              <div>
+                <h2 className="section-title">Results</h2>
+                <p className="section-subtitle">Profit analysis for your crop</p>
+              </div>
+            </div>
             {result?.error ? (
-              <div className="text-center py-12 text-rose-500">{result.error}</div>
+              <div className="alert alert-danger"><span>⚠️</span><span>{result.error}</span></div>
             ) : result ? (
-              <div className="space-y-5 fade-up">
+              <div className="space-y-5">
                 {/* Summary cards */}
                 <div className="grid grid-cols-3 gap-3">
-                  <div className="bg-slate-50 dark:bg-slate-800 rounded-2xl px-4 py-3 border border-slate-200/70 dark:border-slate-700 text-center">
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Cost</p>
-                    <p className="font-bold text-slate-900 dark:text-white text-lg">₹{result.total_cost.toLocaleString()}</p>
+                  <div className="text-center p-3 rounded-xl" style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)' }}>
+                    <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: 'var(--color-text-muted)' }}>Total Cost</p>
+                    <p className="font-bold" style={{ fontSize: '1rem', color: 'var(--color-text)' }}>₹{result.total_cost.toLocaleString()}</p>
                   </div>
-                  <div className="bg-slate-50 dark:bg-slate-800 rounded-2xl px-4 py-3 border border-slate-200/70 dark:border-slate-700 text-center">
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Revenue</p>
-                    <p className="font-bold text-sky-600 dark:text-sky-300 text-lg">₹{result.total_revenue.toLocaleString()}</p>
+                  <div className="text-center p-3 rounded-xl" style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)' }}>
+                    <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: 'var(--color-text-muted)' }}>Revenue</p>
+                    <p className="font-bold" style={{ fontSize: '1rem', color: '#0ea5e9' }}>₹{result.total_revenue.toLocaleString()}</p>
                   </div>
-                  <div className={`rounded-2xl px-4 py-3 border text-center ${isProfitable ? 'bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200/70 dark:border-emerald-500/20' : 'bg-rose-50 dark:bg-rose-500/10 border-rose-200/70 dark:border-rose-500/20'}`}>
-                    <p className={`text-xs mb-1 ${isProfitable ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>Profit Margin</p>
-                    <p className={`font-bold text-lg ${isProfitable ? 'text-emerald-600 dark:text-emerald-300' : 'text-rose-600 dark:text-rose-300'}`}>
+                  <div
+                    className="text-center p-3 rounded-xl"
+                    style={{
+                      background: isProfitable ? 'var(--color-success-bg)' : 'var(--color-danger-bg)',
+                      border: `1px solid ${isProfitable ? 'rgba(34,197,94,0.2)' : 'rgba(239,68,68,0.2)'}`,
+                    }}
+                  >
+                    <p
+                      className="text-[10px] font-bold uppercase tracking-widest mb-1"
+                      style={{ color: isProfitable ? '#15803d' : '#b91c1c' }}
+                    >
+                      Profit
+                    </p>
+                    <p
+                      className="font-bold"
+                      style={{ fontSize: '1rem', color: isProfitable ? '#15803d' : '#b91c1c' }}
+                    >
                       ₹{result.profit_margin.toLocaleString()}
                     </p>
                   </div>
                 </div>
 
                 {/* Profit margin % */}
-                <div className={`flex items-center justify-center gap-3 px-6 py-4 rounded-2xl ${isProfitable ? 'bg-emerald-50 dark:bg-emerald-500/10' : 'bg-rose-50 dark:bg-rose-500/10'}`}>
-                  {isProfitable ? <TrendingUp size={24} className="text-emerald-600 dark:text-emerald-400" /> : <TrendingDown size={24} className="text-rose-600 dark:text-rose-400" />}
+                <div
+                  className="flex items-center justify-center gap-3 px-6 py-4 rounded-2xl"
+                  style={{
+                    background: isProfitable ? 'var(--color-success-bg)' : 'var(--color-danger-bg)',
+                    border: `1px solid ${isProfitable ? 'rgba(34,197,94,0.2)' : 'rgba(239,68,68,0.2)'}`,
+                  }}
+                >
+                  {isProfitable ? <TrendingUp size={24} style={{ color: '#15803d' }} /> : <TrendingDown size={24} style={{ color: '#b91c1c' }} />}
                   <div className="text-center">
-                    <p className={`text-3xl font-bold ${isProfitable ? 'text-emerald-600 dark:text-emerald-300' : 'text-rose-600 dark:text-rose-300'}`}>{result.profit_margin_pct}%</p>
-                    <p className={`text-xs ${isProfitable ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>Profit Margin</p>
+                    <p
+                      className="font-extrabold"
+                      style={{ fontSize: '1.875rem', color: isProfitable ? '#15803d' : '#b91c1c' }}
+                    >
+                      {result.profit_margin_pct}%
+                    </p>
+                    <p
+                      className="text-xs"
+                      style={{ color: isProfitable ? '#15803d' : '#b91c1c' }}
+                    >
+                      Profit Margin
+                    </p>
                   </div>
                 </div>
 
-                {/* Cost breakdown chart */}
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">Cost Breakdown</p>
-                  <div className="h-[160px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={costData} layout="vertical" margin={{ left: 20, right: 20 }}>
-                        <Tooltip formatter={(v) => [`₹${v.toLocaleString()}`, 'Cost']} contentStyle={{ borderRadius: 12, fontSize: 12 }} />
-                        <Bar dataKey="value" radius={[0, 8, 8, 0]}>
-                          {costData.map((_, i) => <Cell key={i} fill={['#3b82f6', '#22c55e', '#f59e0b'][i]} />)}
-                        </Bar>
-                      </BarChart>
-                    </ResponsiveContainer>
+                {/* Cost breakdown */}
+                {costData.length > 0 && (
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: 'var(--color-text-muted)' }}>Cost Breakdown</p>
+                    <div className="grid grid-cols-3 gap-3">
+                      {costData.map((d, i) => (
+                        <div key={d.name} className="rounded-xl p-3 text-center" style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)' }}>
+                          <span className="mx-auto mb-2 block w-3 h-3 rounded-full" style={{ background: ['#3b82f6', '#22c55e', '#f59e0b'][i] }} />
+                          <p className="text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>{d.name}</p>
+                          <p className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>₹{d.value.toLocaleString()}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="flex gap-4 justify-center mt-2">
-                    {costData.map((d, i) => (
-                      <div key={d.name} className="flex items-center gap-1.5 text-xs text-slate-500">
-                        <span className="w-3 h-3 rounded-full" style={{ background: ['#3b82f6', '#22c55e', '#f59e0b'][i] }} />
-                        {d.name}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                )}
 
-                {/* Cost vs Revenue donut */}
+                {/* Cost vs Revenue */}
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">Cost vs Revenue</p>
-                  <div className="h-[160px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie data={[
-                          { name: 'Total Cost', value: result.total_cost },
-                          { name: 'Profit', value: Math.max(0, result.profit_margin) },
-                        ]} cx="50%" cy="50%" innerRadius={50} outerRadius={70} dataKey="value"
-                          labels={['Cost', 'Profit']}
-                        >
-                          <Cell fill="#94a3b8" />
-                          <Cell fill={isProfitable ? '#22c55e' : '#f59e0b'} />
-                        </Pie>
-                        <Tooltip formatter={(v, n) => [`₹${v.toLocaleString()}`, n]} contentStyle={{ borderRadius: 12, fontSize: 12 }} />
-                      </PieChart>
-                    </ResponsiveContainer>
+                  <p className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: 'var(--color-text-muted)' }}>Cost vs Revenue</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-xl p-4" style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)' }}>
+                      <p className="text-xs font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>Total Cost</p>
+                      <p className="text-lg font-bold" style={{ color: 'var(--color-text)' }}>₹{result.total_cost.toLocaleString()}</p>
+                    </div>
+                    <div className="rounded-xl p-4" style={{ background: isProfitable ? 'var(--color-success-bg)' : 'var(--color-warning-bg)', border: `1px solid ${isProfitable ? 'rgba(34,197,94,0.2)' : 'rgba(245,158,11,0.2)'}` }}>
+                      <p className="text-xs font-medium mb-1" style={{ color: isProfitable ? '#15803d' : '#b45309' }}>Profit</p>
+                      <p className="text-lg font-bold" style={{ color: isProfitable ? '#15803d' : '#b45309' }}>₹{Math.max(0, result.profit_margin).toLocaleString()}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-16 text-slate-400">
-                <DollarSign size={48} strokeWidth={1} className="mb-4 opacity-30" />
-                <p className="text-sm">Fill in the costs and click calculate to see profit breakdown</p>
+              <div className="flex flex-col items-center justify-center py-16 text-center">
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center mb-4"
+                  style={{ background: 'var(--color-surface-2)' }}
+                >
+                  <DollarSign size={28} style={{ color: 'var(--color-text-muted)' }} strokeWidth={1.5} />
+                </div>
+                <p className="font-semibold text-sm mb-1" style={{ color: 'var(--color-text)' }}>No calculation yet</p>
+                <p className="text-xs max-w-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+                  Fill in the costs and click Calculate Profit to see the breakdown
+                </p>
               </div>
             )}
           </div>
